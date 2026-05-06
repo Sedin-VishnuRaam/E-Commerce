@@ -29,7 +29,7 @@ export default function ProductCard({ product, view }) {
         padding: "10px",
     }}
     >        
-      <img src={product.image} width="100" />
+      <img src={product.image} alt={product.title} width="100" />
       <h4>{product.title}</h4>
       <p>₹{product.price}</p>
       <p>{getStockLabel(product.stock)}</p>

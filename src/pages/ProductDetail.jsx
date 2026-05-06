@@ -17,7 +17,7 @@ export default function ProductDetail() {
     if (items.length === 0) {
       dispatch(fetchProducts());
     }
-  }, []);
+  }, [dispatch, items.length]);
 
   const product = items.find(p => p.id === Number(id));
 

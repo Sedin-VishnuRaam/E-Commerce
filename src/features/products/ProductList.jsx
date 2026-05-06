@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef } from "react";
+import {useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll.js";
 import { fetchProducts } from "./ProductSlice.js";
@@ -6,11 +6,10 @@ import useDebounce from "../../hooks/useDebounce.js";
 import ProductCard from "./ProductCard.jsx";
 import Navbar from "../../components/Navbar.jsx";
 import SearchBar from "../../components/SearchBar.jsx";
-import Loader from "../../components/Loader.jsx";
 
 export default function ProductList() {
   const dispatch = useDispatch();
-  const { items , loading} = useSelector((state) => state.products);
+  const { items } = useSelector((state) => state.products);
   const [view, setView] = useState("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebounce(searchQuery, 300);
