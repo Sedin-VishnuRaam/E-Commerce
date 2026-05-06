@@ -1,4 +1,4 @@
-import {useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll.js";
 import { fetchProducts } from "./ProductSlice.js";
@@ -17,12 +17,12 @@ export default function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [visible, setVisible] = useState(6);
   const loadMore = () => {
-  if (visible < items.length) {
-    setVisible((prev) => prev + 6);
-  }
-};
+    if (visible < items.length) {
+      setVisible((prev) => prev + 6);
+    }
+  };
 
-const loaderRef = useInfiniteScroll(loadMore);
+  const loaderRef = useInfiniteScroll(loadMore);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -30,59 +30,57 @@ const loaderRef = useInfiniteScroll(loadMore);
 
   const filteredProducts = items.filter((product) => {
     const matchesSearch = product.title
-    .toLowerCase()
-    .includes(debouncedSearch.toLowerCase());
+      .toLowerCase()
+      .includes(debouncedSearch.toLowerCase());
 
     const matchesCategory =
-    selectedCategory === "All" || product.category === selectedCategory;
+      selectedCategory === "All" || product.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
   }
   );
 
   return (
-        <>
+    <>
       <Navbar />
       <SearchBar onSearch={setSearchQuery} />
       <select
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
         style={{ marginBottom: "10px" }}
-        >
+      >
         {categories.map((cat) => (
-            <option key={cat} value={cat}>
+          <option key={cat} value={cat}>
             {cat}
-            </option>
+          </option>
         ))}
-        </select>
+      </select>
 
-        <div className="filters" style={{ marginBottom: "10px" }}>
-            <button onClick={() => setView("grid")}>Grid</button>
-            <button onClick={() => setView("list")}>List</button>
+      <div className="filters" style={{ marginBottom: "10px" }}>
+        <button onClick={() => setView("grid")}>Grid</button>
+        <button onClick={() => setView("list")}>List</button>
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns:
+            view === "grid" ? "repeat(3, 1fr)" : "1fr",
+          gap: "10px",
+        }}
+      >
+        {filteredProducts.slice(0, visible).map((p) => (
+          <ProductCard key={p.id} product={p} view={view} />
+        ))}
+      </div>
+
+      {visible < filteredProducts.length ? (
+        <div ref={loaderRef} style={{ height: "50px", textAlign: "center" }}>
+          Loading more...
         </div>
-      {/* Products */}
-<div
-  style={{
-    display: "grid",
-    gridTemplateColumns:
-      view === "grid" ? "repeat(3, 1fr)" : "1fr",
-    gap: "10px",
-  }}
->
-  {filteredProducts.slice(0, visible).map((p) => (
-    <ProductCard key={p.id} product={p} view={view} />
-  ))}
-</div>
+      ) : (
+        <p style={{ textAlign: "center" }}>No more products</p>
+      )}
 
-{/* Infinite Scroll */}
-{visible < filteredProducts.length ? (
-  <div ref={loaderRef} style={{ height: "50px", textAlign: "center" }}>
-    Loading more...
-  </div>
-) : (
-  <p style={{ textAlign: "center" }}>No more products</p>
-)}
-
-      </>
+    </>
   );
 }

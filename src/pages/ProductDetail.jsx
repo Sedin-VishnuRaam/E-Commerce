@@ -10,7 +10,6 @@ export default function ProductDetail() {
 
   const { items, status } = useSelector(state => state.products);
 
-  // ✅ FIXED
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -25,11 +24,11 @@ export default function ProductDetail() {
   if (!product) return <p>Product not found</p>;
 
   return (
-    <div className = "product-details" style = {{padding: "20px"}}>
-      <img 
-        src = {product.image}
-        alt = {product.title}
-        style={{ width: "200px", height: "200px", objectFit: "contain" }} 
+    <div className="product-details" style={{ padding: "20px" }}>
+      <img
+        src={product.image}
+        alt={product.title}
+        style={{ width: "200px", height: "200px", objectFit: "contain" }}
       />
       <h2>{product.title}</h2>
       <p>₹{product.price}</p>
@@ -41,7 +40,6 @@ export default function ProductDetail() {
         {product.stock === 0 && "Out of stock"}
       </p>
 
-      {/* Quantity Controls */}
       <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
       <span>{quantity}</span>
       <button
@@ -52,7 +50,6 @@ export default function ProductDetail() {
         +
       </button>
 
-      {/* Add to Cart */}
       <button
         disabled={product.stock === 0}
         onClick={() =>
