@@ -1,7 +1,7 @@
-import ProductList from "./features/products/ProductList";
+import ProductList from "./features/products/ProductList.jsx";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import ProductDetail from "./pages/ProductDetail";
-import Cart from "./features/cart/Cart";
+import ProductDetail from "./pages/ProductDetail.jsx";
+import Cart from "./features/cart/Cart.jsx";
 
 export default function App() {
   return (

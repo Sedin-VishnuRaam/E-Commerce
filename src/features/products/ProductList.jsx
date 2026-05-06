@@ -1,12 +1,12 @@
 import {useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useInfiniteScroll from "../../hooks/useInfiniteScroll";
-import { fetchProducts } from "./ProductSlice";
-import useDebounce from "../../hooks/useDebounce";
-import ProductCard from "./ProductCard";
-import Navbar from "../../components/Navbar";
-import SearchBar from "../../components/SearchBar";
-import Loader from "../../components/Loader"
+import useInfiniteScroll from "../../hooks/useInfiniteScroll.js";
+import { fetchProducts } from "./ProductSlice.js";
+import useDebounce from "../../hooks/useDebounce.js";
+import ProductCard from "./ProductCard.jsx";
+import Navbar from "../../components/Navbar.jsx";
+import SearchBar from "../../components/SearchBar.jsx";
+import Loader from "../../components/Loader.jsx";
 
 export default function ProductList() {
   const dispatch = useDispatch();

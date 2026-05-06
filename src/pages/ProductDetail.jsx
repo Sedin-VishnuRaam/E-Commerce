@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../features/products/ProductSlice";
-import { addToCart } from "../features/cart/cartSlice";
+import { fetchProducts } from "../features/products/ProductSlice.js";
+import { addToCart } from "../features/cart/cartSlice.js";
 
 export default function ProductDetail() {
   const { id } = useParams();
