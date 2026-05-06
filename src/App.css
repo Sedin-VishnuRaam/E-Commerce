@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 768px) {
+  .product-details {
+    flex-direction: column;
+  }
+  .navbar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .filters {
+    flex-direction: column;
+  }
+}
